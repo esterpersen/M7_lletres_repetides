@@ -2,10 +2,10 @@
 
 //Exercici 1
 
-const name = ["e", "s", "t", "e", "r"];
+const nom = ["e", "s", "t", "e", "r"];
 //recorrer l'array del nom i imprimir cada lletra a la console
-for (let i = 0; i < name.length; i++) {
-	console.log(name[i]);
+for (let i = 0; i < nom.length; i++) {
+	console.log(nom[i]);
 }
 
 //Exercici 2
@@ -30,40 +30,14 @@ for (let i = 0; i < elMeuNom2.length; i++) {
 }
 
 //Exercici 3
-// .map + .reduce
-
-//crear un objecte amb 2 valors a partir del .map()
-function crearObjLletra(valor) {
-	let lletra = {
-		valor: valor,
-		count: 1
-	};
-	return lletra;
-}
-var lletresCount1 = name.map(crearObjLletra);
-
-//fer la suma/acumulatori dels comptadors per a cada lletra
-const lletresContades = lletresCount1.reduce((acumulador, current) => {
-	//agafar la el valor de cada lletra 
-	let comptadorIndividual = current.valor;
-
-	// si ja ha trobat el mateix valor abans, volem q agafi el valor i l'actualitzi(li sumi 1 amb el "++")
-	if (acumulador[comptadorIndividual]) {
-		acumulador[comptadorIndividual]++;
-	} else {
-		//si no ha trobat el valor abans, comptem que apareix 1 cop
-		acumulador[comptadorIndividual] = 1;
-	}
-	return acumulador;
-}, {});
-
-console.log(lletresContades);
+let map = nom.reduce(function (prev, cur) { prev[cur] = (prev[cur] || 0) + 1; return prev; }, {});
+console.log(map);
 
 //Exercici 4
 const elMeuCognom1 = ["p", "e", "r", "e", "l", "l", "o"];
 const elMeuCognom2 = ["s", "e", "n", "t", "i", "s"];
 
-const fullName = [...name, ..." ", ...elMeuCognom1, ..." ", ...elMeuCognom2];
+const fullName = [...nom, ..." ", ...elMeuCognom1, ..." ", ...elMeuCognom2];
 
 console.log(fullName);
 
@@ -88,33 +62,37 @@ console.log(treureDuplicats(analisiStrings(str)));
 
 //Exercici 1
 function n1ex1Funcio() {
-	const name1 = document.getElementById("n1ex1").value;
+	const nom1 = document.getElementById("n1ex1").value;
 	//recorrer l'array del nom i imprimir cada lletra a la console
-	for (let i = 0; i < name1.length; i++) {
-		console.log(name1[i]);
+	for (let i = 0; i < nom1.length; i++) {
+		console.log(nom1[i]);
 	}
 }
 
 //Exercici 2
 function n1ex2Funcio() {
-	const name2 = document.getElementById("n1ex2").value;
-	console.log("Partim del nom " + name2);
+	const nom2 = document.getElementById("n1ex2").value.toLowerCase();
+	console.log("Partim del nom " + nom2);
 	let missatge = "Els noms de persones no contenen el número: ";
 	let missatgeNumeros = [];
 
-	for (let i = 0; i < name2.length; i++) {
+	for (let i = 0; i < nom2.length; i++) {
 		//si son vocals
-		if (name2[i] === "a" || name2[i] === "e" || name2[i] === "i" || name2[i] === "o" || name2[i] === "u") {
-			console.log("He trobat la VOCAL: " + name2[i]);
+		if (nom2[i] === "a" || nom2[i] === "e" || nom2[i] === "i" || nom2[i] === "o" || nom2[i] === "u") {
+			console.log("He trobat la VOCAL: " + nom2[i]);
 		}
 		//si son numeros
-		else if (name2[i] == 0 || name2[i] === "1" || name2[i] === "2" || name2[i] === "3" || name2[i] === "4" || name2[i] === "5" || name2[i] === "6" || name2[i] === "7" || name2[i] === "8" || name2[i] === "9") {
-			missatgeNumeros.push(missatge + name2[i]);
+		else if (nom2[i] == 0 || nom2[i] === "1" || nom2[i] === "2" || nom2[i] === "3" || nom2[i] === "4" || nom2[i] === "5" || nom2[i] === "6" || nom2[i] === "7" || nom2[i] === "8" || nom2[i] === "9") {
+			missatgeNumeros.push(missatge + nom2[i]);
 			document.getElementById("n1ex2Mostrar").innerHTML = missatgeNumeros.join('. </br>');
 
 		} //si son consonants
+		else if (nom2[i] === "b" || nom2[i] === "c" || nom2[i] === "d" || nom2[i] === "f" || nom2[i] === "g" || nom2[i] === "h" || nom2[i] === "j" || nom2[i] === "k" || nom2[i] === "l" || nom2[i] === "m" || nom2[i] === "n" || nom2[i] === "p" || nom2[i] === "q" || nom2[i] === "r" || nom2[i] === "s" || nom2[i] === "t" || nom2[i] === "v" || nom2[i] === "w" || nom2[i] === "x" || nom2[i] === "y" || nom2[i] === "z") {
+			console.log("He trobat la CONSONANT: " + nom2[i]);
+		}
+		// qualsevol altre caràcter
 		else {
-			console.log("He trobat la CONSONANT: " + name2[i]);
+			console.log("Això no és ni una vocal, ni una consonant, ni un número: " + nom2[i]);
 		}
 	}
 }
@@ -127,35 +105,8 @@ function n1ex3Funcio() {
 
 	//comprovar que no s'ha deixat en blanc.
 	if (nomN1Ex1) {
-		//crear un objecte amb 2 valors a partir del .map()
-		let lletresCountOne = nomN1Ex1Array.map(crearObjLletra2);
-
-		function crearObjLletra2(valor) {
-			let lletra = {
-				valor: valor,
-				count: 1
-			};
-			return lletra;
-		}
-
-		//fer la suma/acumulatori dels comptadors per a cada lletra
-		const lletresContades2 = lletresCountOne.reduce((acumulador, current) => {
-			//esborrar el missatge de l'else
-			document.getElementById("n1ex3Mostrar").innerHTML = "";
-
-			//agafar la el valor de cada lletra 
-			let comptadorIndividual = current.valor;
-
-			// si ja ha trobat el mateix valor abans, volem q agafi el valor i l'actualitzi(li sumi 1 amb el "++")
-			if (acumulador[comptadorIndividual]) {
-				acumulador[comptadorIndividual]++;
-			} else {
-				//si no ha trobat el valor abans, comptem que apareix 1 cop
-				acumulador[comptadorIndividual] = 1;
-			}
-			return acumulador;
-		}, {});
-		console.log(lletresContades2);
+		let map2 = nomN1Ex1Array.reduce(function (prev, cur) { prev[cur] = (prev[cur] || 0) + 1; return prev; }, {});
+		console.log(map2);
 	} else {
 		document.getElementById("n1ex3Mostrar").innerHTML = "Si no s'insereix un nom no funciona.";
 	}
